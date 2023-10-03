@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { MovieState } from "../movieState";
 // Animations
-import {motion} from 'framer-motion'
-import {pageAnimation} from '../animation.js'
+import { motion } from "framer-motion";
+import { pageAnimation } from "../animation.js";
+import ScrollTop from "../components/ScrollTop";
 
 const MovieDetail = () => {
     const location = useLocation();
@@ -30,12 +31,17 @@ const MovieDetail = () => {
                     </Headline>
                     <Awards>
                         {movie.awards.map((award) => (
-                            <Award title={award.title} description={award.description} key={award.title} />
+                            <Award
+                                title={award.title}
+                                description={award.description}
+                                key={award.title}
+                            />
                         ))}
                     </Awards>
                     <ImageDisplay>
                         <img src={movie.secondaryImg} alt="secondary image" />
                     </ImageDisplay>
+                    <ScrollTop />
                 </Details>
             )}
         </>
@@ -68,34 +74,38 @@ const Awards = styled.div`
     margin: 5rem 10rem;
     align-items: center;
     justify-content: space-around;
+    @media (max-width: 1300px){
+        display: block;
+        margin: 2rem;
+    }
 `;
 
 const AwardStyle = styled.div`
     padding: 5rem;
-    h3{
+    h3 {
         font-size: 2rem;
     }
-    .line{
+    .line {
         width: 100%;
         height: 0.5rem;
         background-color: #23d997;
         margin: 1rem 0;
     }
-    p{
+    p {
         padding: 2rem 0;
     }
-`
+`;
 
 const ImageDisplay = styled.div`
     min-height: 50vh;
-    img{
+    img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-`
+`;
 // Award component
-const Award = ({title, description}) => {
+const Award = ({ title, description }) => {
     return (
         <AwardStyle>
             <h3>{title}</h3>
